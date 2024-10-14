@@ -1,11 +1,14 @@
 
-import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import AuthPage from './pages/auth'
 
 function App() {
 
   return (
     <>
-     <button className='bg-zinc-400'>Click</button>
+     <Routes>
+      <Route path='/auth' element={<AuthPage/>}/>
+     </Routes>
     </>
   )
 }
