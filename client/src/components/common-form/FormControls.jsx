@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Textarea } from "../ui/textarea"; // assuming you have this component
+import { Textarea } from "../ui/textarea";
 
 const FormControls = ({ formControls = [], formData, setFormData }) => {
   function renderComponentByType(getControlItem) {
@@ -30,13 +30,16 @@ const FormControls = ({ formControls = [], formData, setFormData }) => {
           />
         );
         break;
-
       case "select":
         element = (
           <Select
             onValueChange={(value) =>
-              setFormData({ ...formData, [getControlItem.name]: value })
+              setFormData({
+                ...formData,
+                [getControlItem.name]: value,
+              })
             }
+            value={currentControlItemValue}
           >
             <SelectTrigger className="w-full">
               <SelectValue placeholder={getControlItem.label} />
@@ -53,7 +56,6 @@ const FormControls = ({ formControls = [], formData, setFormData }) => {
           </Select>
         );
         break;
-
       case "textarea":
         element = (
           <Textarea
@@ -67,7 +69,6 @@ const FormControls = ({ formControls = [], formData, setFormData }) => {
           />
         );
         break;
-
       default:
         element = (
           <Input

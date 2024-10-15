@@ -17,14 +17,32 @@ import { Link } from "react-router-dom";
 const index = () => {
   const [activeTab, setActiveTab] = useState("signin");
 
-  const {signInFormData,
+  const {
+    signInFormData,
     setSignInFormData,
     signUpFormData,
-    setSignUpFormData,} = useContext(AuthContext)
+    setSignUpFormData,
+  } = useContext(AuthContext);
 
   function handleTabChange(value) {
     setActiveTab(value);
   }
+  function checkIfSignInFormValid() {
+    return (
+      signInFormData &&
+      signInFormData.userEmail !== "" &&
+      signInFormData.password !== ""
+    );
+  }
+  function checkIfSignUpFormValid() {
+    return (
+      signUpFormData &&
+      signUpFormData.userEmail !== "" &&
+      signUpFormData.password !== ""
+    );
+  }
+
+  console.log(signInFormData);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -42,8 +60,12 @@ const index = () => {
           className="w-full max-w-md"
         >
           <TabsList className="grid w-full grid-cols-2 h-11">
-            <TabsTrigger value="signin" className="py-2">Sign In</TabsTrigger>
-            <TabsTrigger value="signup" className="py-2">Sign Up</TabsTrigger>
+            <TabsTrigger value="signin" className="py-2">
+              Sign In
+            </TabsTrigger>
+            <TabsTrigger value="signup" className="py-2">
+              Sign Up
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="signin">
             <Card className="p-6 space-y-4">
@@ -59,12 +81,13 @@ const index = () => {
                   buttonText={"Sign In"}
                   formData={signInFormData}
                   setFormData={setSignInFormData}
+                  isButtonDisabled={!checkIfSignInFormValid()}
                 />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="signup">
-          <Card className="p-6 space-y-4">
+            <Card className="p-6 space-y-4">
               <CardHeader>
                 <CardTitle>Create a new account</CardTitle>
                 <CardDescription>
@@ -75,8 +98,9 @@ const index = () => {
                 <CommonForm
                   formControls={signUpFormControls}
                   buttonText={"Sign Up"}
-                  ormData={signUpFormData}
+                  formData={signUpFormData}
                   setFormData={setSignUpFormData}
+                  isButtonDisabled={!checkIfSignUpFormValid()}
                 />
               </CardContent>
             </Card>
