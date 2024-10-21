@@ -32,5 +32,43 @@ const registerUser = async (req, res) => {
   });
 };
 
+const loginUser = async (req, res) => {
+  const { userEmail, password } = req.body;
 
-module.exports = { registerUser };
+  const checkUser = await User.findOne({ userEmail });
+
+  if (!checkUser || !(await bcrypt.compare(password, checkUser.password))) {
+    return (
+      res.status(401).json({
+        success: false,
+        message: "Invalid Credential",
+      }) || console.log("Invalid Credential")
+    );
+  }
+
+  const accessToken = jwt.sign(
+    {
+      id: checkUser._id,
+      userName: checkUser.userName,
+      userEmail: checkUser.userEmail,
+      role: checkUser.role,
+    },
+    "JWT_SECRET",
+    { expiresIn: "120m" }
+  );
+  res.status(200).json({
+    success: true,
+    message: "Logged in Successfully",
+    data: {
+      accessToken,
+      user: {
+        _id: checkUser._id,
+        userName: checkUser.userName,
+        userEmail: checkUser.userEmail,
+        role: checkUser.role,
+      },
+    },
+  });
+};
+
+module.exports = { registerUser, loginUser };

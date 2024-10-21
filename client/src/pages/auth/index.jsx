@@ -23,6 +23,7 @@ const index = () => {
     signUpFormData,
     setSignUpFormData,
     handleRegisterUser,
+    handleLoginUser,
   } = useContext(AuthContext);
 
   function handleTabChange(value) {
@@ -83,6 +84,7 @@ const index = () => {
                   formData={signInFormData}
                   setFormData={setSignInFormData}
                   isButtonDisabled={!checkIfSignInFormValid()}
+                  handleSubmit={handleLoginUser}
                 />
               </CardContent>
             </Card>
