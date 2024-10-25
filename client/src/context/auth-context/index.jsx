@@ -1,5 +1,5 @@
 import { initialSignInFormData, initialSignUpFormData } from "@/config";
-import { registerService, loginService } from "@/services";
+import { registerService, loginService, checkAuthService } from "@/services";
 import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null);
@@ -37,6 +37,8 @@ export default function AuthProvider({ children }) {
     }
   }
 
+  //check auth user
+
   async function checkAuthUser() {
     const data = await checkAuthService();
 
@@ -58,6 +60,9 @@ export default function AuthProvider({ children }) {
     checkAuthUser();
   }, []);
 
+console.log(auth);
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -67,6 +72,7 @@ export default function AuthProvider({ children }) {
         setSignUpFormData,
         handleRegisterUser,
         handleLoginUser,
+        auth,
       }}
     >
       {children}

@@ -42,8 +42,8 @@ const loginUser = async (req, res) => {
       res.status(401).json({
         success: false,
         message: "Invalid Credential",
-      }) || console.log("Invalid Credential")
-    );
+      })
+    )
   }
 
   const accessToken = jwt.sign(
@@ -72,3 +72,4 @@ const loginUser = async (req, res) => {
 };
 
 module.exports = { registerUser, loginUser };
+ 
