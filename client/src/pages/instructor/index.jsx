@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 
 function InstructorDashboardPage() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const {resetCredentials} = useContext(AuthContext)
+  const { resetCredentials } = useContext(AuthContext);
   const menuItems = [
     {
       icon: BarChart,
@@ -31,7 +31,7 @@ function InstructorDashboardPage() {
   ];
 
   function handleLogout() {
-    resetCredentials()
+    resetCredentials();
     sessionStorage.clear();
   }
 
@@ -62,13 +62,11 @@ function InstructorDashboardPage() {
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            {
-              menuItems.map(menuItem=> <TabsContent value={menuItem.value}>
-                {
-                  menuItem.component !== null ? menuItem.component : null
-                }
-              </TabsContent>)
-            }
+            {menuItems.map((menuItem) => (
+              <TabsContent value={menuItem.value}>
+                {menuItem.component !== null ? menuItem.component : null}
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
       </main>

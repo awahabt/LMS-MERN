@@ -18,7 +18,6 @@ export default function AuthProvider({ children }) {
     event.preventDefault();
     const data = await registerService(signUpFormData);
     console.log(data);
-    
   }
   async function handleLoginUser(event) {
     event.preventDefault();
@@ -44,25 +43,25 @@ export default function AuthProvider({ children }) {
   //check auth user
 
   async function checkAuthUser() {
-    try{
+    try {
       const data = await checkAuthService();
 
-    if (data.success) {
-      setAuth({
-        authenticate: true,
-        user: data.data.user,
-      });
-      setLoading(false);
-    } else {
-      setAuth({
-        authenticate: false,
-        user: null,
-      });
-      setLoading(false);
-    }
-    }catch(error){
+      if (data.success) {
+        setAuth({
+          authenticate: true,
+          user: data.data.user,
+        });
+        setLoading(false);
+      } else {
+        setAuth({
+          authenticate: false,
+          user: null,
+        });
+        setLoading(false);
+      }
+    } catch (error) {
       console.log(error);
-      if(!error?.response?.data?.success){
+      if (!error?.response?.data?.success) {
         setAuth({
           authenticate: false,
           user: null,
@@ -70,14 +69,13 @@ export default function AuthProvider({ children }) {
         setLoading(false);
       }
     }
-    
   }
 
-  function resetCredentials(){
+  function resetCredentials() {
     setAuth({
       authenticate: false,
       user: null,
-    })
+    });
   }
 
   //check Auth
@@ -95,12 +93,11 @@ export default function AuthProvider({ children }) {
         handleRegisterUser,
         handleLoginUser,
         auth,
-        resetCredentials
+        resetCredentials,
       }}
     >
       {loading ? <Skeleton /> : children}
       {/* {children} */}
-
     </AuthContext.Provider>
   );
 }

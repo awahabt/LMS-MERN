@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-.bor{
+.bor {
   border: 1px solid black;
 }
-
-
 
 @media (prefers-color-scheme: light) {
   :root {

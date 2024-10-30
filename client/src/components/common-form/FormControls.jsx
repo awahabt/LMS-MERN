@@ -24,7 +24,10 @@ const FormControls = ({ formControls = [], formData, setFormData }) => {
             type={getControlItem.type}
             value={currentControlItemValue}
             onChange={(e) =>
-              setFormData({ ...formData, [getControlItem.name]: e.target.value })
+              setFormData({
+                ...formData,
+                [getControlItem.name]: e.target.value,
+              })
             }
           />
         );
@@ -63,7 +66,10 @@ const FormControls = ({ formControls = [], formData, setFormData }) => {
             placeholder={getControlItem.placeholder}
             value={currentControlItemValue}
             onChange={(e) =>
-              setFormData({ ...formData, [getControlItem.name]: e.target.value })
+              setFormData({
+                ...formData,
+                [getControlItem.name]: e.target.value,
+              })
             }
           />
         );
@@ -77,7 +83,10 @@ const FormControls = ({ formControls = [], formData, setFormData }) => {
             type={getControlItem.type}
             value={currentControlItemValue}
             onChange={(e) =>
-              setFormData({ ...formData, [getControlItem.name]: e.target.value })
+              setFormData({
+                ...formData,
+                [getControlItem.name]: e.target.value,
+              })
             }
           />
         );

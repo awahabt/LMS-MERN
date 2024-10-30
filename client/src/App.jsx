@@ -11,45 +11,42 @@ import NotFoundPage from "./pages/not-found";
 function App() {
   const { auth } = useContext(AuthContext);
   return (
-    
-      <Routes>
-        <Route
-          path="/auth"
-          element={
-            <RouteGuard
-              element={<AuthPage />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
-        />
-        <Route
-          path="/instructor"
-          element={
-            <RouteGuard
-              element={<InstructorDashboardPage />}
-              authenticated={auth?.user}
-              user={auth?.user}
-            />
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <RouteGuard
-              element={<StudentViewCommonLayout />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
-        >
-          <Route path="" element={<StudentHomePage/>}/>
-          <Route path="home" element={<StudentHomePage/>}/>
-
-        </Route>
-        <Route path="*" element={<NotFoundPage/>}/>
-      </Routes>
-  
+    <Routes>
+      <Route
+        path="/auth"
+        element={
+          <RouteGuard
+            element={<AuthPage />}
+            authenticated={auth?.authenticate}
+            user={auth?.user}
+          />
+        }
+      />
+      <Route
+        path="/instructor"
+        element={
+          <RouteGuard
+            element={<InstructorDashboardPage />}
+            authenticated={auth?.user}
+            user={auth?.user}
+          />
+        }
+      />
+      <Route
+        path="/"
+        element={
+          <RouteGuard
+            element={<StudentViewCommonLayout />}
+            authenticated={auth?.authenticate}
+            user={auth?.user}
+          />
+        }
+      >
+        <Route path="" element={<StudentHomePage />} />
+        <Route path="home" element={<StudentHomePage />} />
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
