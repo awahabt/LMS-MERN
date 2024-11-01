@@ -1,7 +1,15 @@
-import React from "react";
+import { AuthContext } from "@/context/auth-context";
+import React, { useContext } from "react";
 
 const StudentHomePage = () => {
-  return <div>Home Page</div>;
+  const {resetCredentials} = useContext(AuthContext) 
+  function handleLogout() {
+    resetCredentials();
+    sessionStorage.clear();
+  }
+  return <div>Home Page
+    <button onClick={handleLogout}>Log Out</button>
+  </div>;
 };
 
 export default StudentHomePage;

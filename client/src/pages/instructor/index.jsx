@@ -45,6 +45,7 @@ function InstructorDashboardPage() {
               <Button
                 className="w-full justify-start mb-2"
                 key={menuItem.value}
+                variant={activeTab === menuItem.value ? "secondary": "ghost"}
                 onClick={
                   menuItem.value === "logout"
                     ? handleLogout
@@ -58,7 +59,7 @@ function InstructorDashboardPage() {
           </nav>
         </div>
       </aside>
-      <main className="flex p-8 overflow-y-auto bor">
+      <main className="flex-1 p-8 overflow-y-auto">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
