@@ -1,4 +1,6 @@
 const cloudinary = require("cloudinary").v2;
+require('dotenv').config()
+
 
 //configure with env data
 cloudinary.config({
@@ -7,11 +9,14 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadMediaToCLoudinary = async (filePath) => {
+const uploadMediaToCloudinary = async (filePath) => {
   try {
     const result = await cloudinary.uploader.upload(filePath, {
       resource_type: "auto",
     });
+    console.log(result);
+    
+
     return result;
   } catch (error) {
     console.log(error);
@@ -19,14 +24,13 @@ const uploadMediaToCLoudinary = async (filePath) => {
   }
 };
 
-
-const deleteMediFromCloudinary = async (publicId)=> {
-    try {
-        await cloudinary.uploader.destroy(publicId);
-      } catch (error) {
-        console.log(error);
-        throw new Error("Failed to delete assets from cloudinary");
-      }
+const deleteMediaFromCloudinary = async (publicId) => {
+  try {
+    await cloudinary.uploader.destroy(publicId);
+  } catch (error) {
+    console.log(error);
+    throw new Error("failed to delete assest from cloudinary");
+  }
 };
 
-module.exports = { uploadMediaToCLoudinary, deleteMediFromCloudinary}
+module.exports = { uploadMediaToCloudinary, deleteMediaFromCloudinary };
