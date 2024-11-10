@@ -31,7 +31,7 @@ mongoose
 
 //routes configration
 app.use("/auth", authRoutes);
-app.use('/media', mediaRoutes);
+app.use("/media", mediaRoutes);
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
