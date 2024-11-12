@@ -1,6 +1,6 @@
 const cloudinary = require("cloudinary").v2;
-require('dotenv').config()
-
+require('dotenv').config();
+// require('dotenv').load();
 
 //configure with env data
 cloudinary.config({
@@ -11,6 +11,7 @@ cloudinary.config({
 
 const uploadMediaToCloudinary = async (filePath) => {
   try {
+    console.log
     const result = await cloudinary.uploader.upload(filePath, {
       resource_type: "auto",
     });
