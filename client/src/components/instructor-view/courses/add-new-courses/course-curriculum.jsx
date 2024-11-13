@@ -14,6 +14,8 @@ const CourseCurriculum = () => {
     setCourseCurriculumFormData,
     mediaUploadProgress,
     setMediaUploadProgress,
+    mediauploadProgressPercentage,
+    setMediauploadProgressPercentage,
   } = useContext(InstructorContext);
 
   function handleNewLecture() {
@@ -53,16 +55,16 @@ const CourseCurriculum = () => {
       videoFormData.append("file", selectedFile);
       try {
         setMediaUploadProgress(true);
-        const response = await mediaUploadService(videoFormData);
-        if(response.success){
+        const response = await mediaUploadService(videoFormData, setMediauploadProgressPercentage);
+        if (response.success) {
           let copyCourseCurriculumFormData = [...courseCurriculumFormData];
           copyCourseCurriculumFormData[currentIndex] = {
             ...copyCourseCurriculumFormData[currentIndex],
-            videoUrl : response?.data?.url,
-            publicId: response?. data?.public_id
-          }
+            videoUrl: response?.data?.url,
+            publicId: response?.data?.public_id,
+          };
           setCourseCurriculumFormData(copyCourseCurriculumFormData);
-          setMediaUploadProgress(false)
+          setMediaUploadProgress(false);
         }
         console.log(response, "response");
       } catch (error) {
@@ -71,7 +73,6 @@ const CourseCurriculum = () => {
     }
   }
   console.log(courseCurriculumFormData);
-  
 
   return (
     <Card>
