@@ -31,6 +31,8 @@ const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
 
   function handleSeekChange() {}
 
+  function handleQuality(){}
+
   function handleSeekMouseUp() {}
 
   return (
@@ -59,7 +61,7 @@ const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
             value={[played * 100]}
             max={100}
             step={0.1}
-            onValueChange={(value)=> handleSeekChange([value[0]/100])}
+            onValueChange={(value) => handleSeekChange([value[0] / 100])}
             onValueCommit={handleSeekMouseUp}
             className="w-full mb-4"
           />
