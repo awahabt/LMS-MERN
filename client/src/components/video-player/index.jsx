@@ -31,7 +31,7 @@ const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
 
   function handleSeekChange() {}
 
-  function handleQuality(){}
+  function handleQuality() {}
 
   function handleSeekMouseUp() {}
 
