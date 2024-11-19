@@ -2,7 +2,14 @@ import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { Slider } from "../ui/slider";
 import { Button } from "../ui/button";
-import { Pause, Play, RotateCcw, Volume2, VolumeX } from "lucide-react";
+import {
+  Pause,
+  Play,
+  RotateCcw,
+  RotateCw,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
 
 const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
   const [playing, setPlaying] = useState(false);
@@ -11,9 +18,9 @@ const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [showControls, setShowControls] = useState(false);
+  const [showControls, setShowControls] = useState(true);
 
-  const playedRef = useRef(null);
+  const playerRef = useRef(null);
   const playedContainerRef = useRef(null);
   const controlsTimeoutRef = useRef(null);
 
@@ -21,19 +28,37 @@ const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
     setPlaying(!playing);
   }
 
-  function handleProgress() {}
+  function handleProgress(state) {
+    if (!seeking) {
+      setPlayed(state.played);
+    }
+  }
 
-  function handleRewind() {}
+  function handleRewind() {
+    playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() - 5);
+  }
 
-  function handleForward() {}
+  function handleForward() {
+    playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() + 5);
+  }
 
-  function handleToggleMute() {}
+  function handleToggleMute() {
+    setMuted(!muted);
+  }
 
-  function handleSeekChange() {}
+  function handleSeekChange(newValue) {
+    setPlayed(newValue[0]);
+    setSeeking(true);
+  }
 
-  function handleQuality() {}
+  function handleSeekMouseUp() {
+    setSeeking(false);
+    playerRef.current?.seekTo(played);
+  }
 
-  function handleSeekMouseUp() {}
+  function handleVolumeChange(newValue) {
+    setVolume(newValue[0]);
+  }
 
   return (
     <div
@@ -44,17 +69,20 @@ const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
       style={{ width, height }}
     >
       <ReactPlayer
-        ref={playedRef}
+        ref={playerRef}
         className="absolute top-0 left-0"
+        width="100%"
+        height="100%"
+        url={url}
         playing={playing}
-        vloume={volume}
+        volume={volume}
         muted={muted}
         onProgress={handleProgress}
       />
       {showControls && (
         <div
-          className={`absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-75 p-4 transition-opacity duration-300 ${
-            showControls ? " opacity-100" : "opacity-0"
+          className={`absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-75 px-2 pb-2 transition-opacity duration-300 ${
+            showControls ? "opacity-100" : "opacity-0"
           }`}
         >
           <Slider
@@ -107,6 +135,13 @@ const VideoPlayer = ({ width = "100%", height = "100%", url }) => {
                   <Volume2 className="h-6 w-6" />
                 )}
               </Button>
+              <Slider
+                value={[volume * 100]}
+                max={100}
+                step={1}
+                onValueChange={(value) => handleVolumeChange([value[0] / 100])}
+                className="w-24"
+              />
             </div>
           </div>
         </div>
