@@ -8,7 +8,7 @@ import VideoPlayer from "@/components/video-player";
 import { courseCurriculumInitialFormData } from "@/config";
 import { InstructorContext } from "@/context/instructor-context";
 import { mediaUploadService } from "@/services";
-import { Delete, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import React, { useContext } from "react";
 
 const CourseCurriculum = () => {
@@ -123,14 +123,13 @@ const CourseCurriculum = () => {
                   <div className="flex gap-3 flex-col ">
                     <VideoPlayer
                       url={courseCurriculumFormData[index]?.videoUrl}
-                      width="200px"
+                      width="450px"
                       height="200px"
                     />
                     <div className="flex gap-3 justify-end my-3">
                       <Button>Replace Video</Button>
                       <Button className="bg-red-700">
                         <Trash2 className="h-7 w-5" />
-                        
                       </Button>
                     </div>
                   </div>
